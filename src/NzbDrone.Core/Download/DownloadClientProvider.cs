@@ -9,7 +9,7 @@ namespace NzbDrone.Core.Download
 {
     public interface IProvideDownloadClient
     {
-        IDownloadClient GetDownloadClient(DownloadProtocol downloadProtocol, int indexerId = 0, bool filterBlockedClients = false);
+        IDownloadClient GetDownloadClient(string downloadProtocol, int indexerId = 0, bool filterBlockedClients = false);
         IEnumerable<IDownloadClient> GetDownloadClients(bool filterBlockedClients = false);
         IDownloadClient Get(int id);
     }
@@ -35,7 +35,7 @@ namespace NzbDrone.Core.Download
             _lastUsedDownloadClient = cacheManager.GetCache<int>(GetType(), "lastDownloadClientId");
         }
 
-        public IDownloadClient GetDownloadClient(DownloadProtocol downloadProtocol, int indexerId = 0, bool filterBlockedClients = false)
+        public IDownloadClient GetDownloadClient(string downloadProtocol, int indexerId = 0, bool filterBlockedClients = false)
         {
             var blockedProviders = new HashSet<int>(_downloadClientStatusService.GetBlockedProviders().Select(v => v.ProviderId));
             var availableProviders = _downloadClientFactory.GetAvailableProviders().Where(v => v.Protocol == downloadProtocol).ToList();

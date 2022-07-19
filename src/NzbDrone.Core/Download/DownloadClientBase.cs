@@ -53,10 +53,7 @@ namespace NzbDrone.Core.Download
             return GetType().Name;
         }
 
-        public abstract DownloadProtocol Protocol
-        {
-            get;
-        }
+        public abstract string Protocol { get; }
 
         public abstract string Download(RemoteAlbum remoteAlbum, IIndexer indexer);
         public abstract IEnumerable<DownloadClientItem> GetItems();

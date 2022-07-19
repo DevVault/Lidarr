@@ -7,7 +7,7 @@ namespace NzbDrone.Core.Download
 {
     public interface IDownloadClient : IProvider
     {
-        DownloadProtocol Protocol { get; }
+        string Protocol { get; }
 
         string Download(RemoteAlbum remoteAlbum, IIndexer indexer);
         IEnumerable<DownloadClientItem> GetItems();
